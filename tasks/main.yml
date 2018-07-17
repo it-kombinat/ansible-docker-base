@@ -1,0 +1,20 @@
+---
+# tasks file for ansible-docker-base
+- name: Ensure docker is installed
+  yum:
+    name: docker
+    state: latest
+
+- name: Ensure docker is running and enabled
+  systemctl:
+    name: docker
+    state: started
+    enabled: true
+
+- name: Starting Docker container {{ docker_image }}
+  docker_container:
+    name: {{ container_name }}
+    image: {{ docker_image }}
+    state: present
+    recreate: yes
+  when: {{ container_name }} and {{ container_name }} is defined
