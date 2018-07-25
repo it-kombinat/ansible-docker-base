@@ -1,3 +1,5 @@
+<p><img src="http://1000logos.net/wp-content/uploads/2017/07/Logo-Docker-500x394.jpg" alt="docker logo" title="docker" align="right" height="60" /></p>
+
 Role Name
 =========
 
