@@ -21,10 +21,11 @@
     state: started
     enabled: true
 
-- name: Starting Docker container {{ docker_image }}
+- name: Starting Docker container {{ spl_docker_image }}
   docker_container:
-    name: '{{ container_name }}'
-    image: '{{ docker_image }}'
+    name: '{{ spl_container_name }}'
+    image: '{{ spl_docker_image }}'
+    command: '{{ hec_token }}'
     state: started
     ports:
      - "514:514"
