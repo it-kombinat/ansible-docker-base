@@ -9,6 +9,7 @@ Requirements
 ------------
 
  - Ansible >= 2.4
+ - Docker and docker-py
 
 Role Variables
 --------------
@@ -20,20 +21,6 @@ Role Variables
 | `spl_docker_image` | stackware/spl:1.8 | Docker Image (incl.tag) |
 | `hec_token` | "abcd-efgh-123ada-0815" | HEC Token |
 
-
-Example Playbook
-----------------
-
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
-
-License
--------
-
-BSD
 
 Author Information
 ------------------
