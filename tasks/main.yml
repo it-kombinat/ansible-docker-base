@@ -21,17 +21,32 @@
     state: started
     enabled: true
 
+- name: Preparing Container Volume
+  file:
+    path: /opt/con/etc
+    state: directory
+
+- name: Fetch apps and .conf files
+  git: 
+    repo: "{{ item.repo }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - "{{ splunk_apps }}"
+
 - name: Starting Docker container {{ spl_docker_image }}
   docker_container:
     name: '{{ spl_container_name }}'
     image: '{{ spl_docker_image }}'
     command: '{{ hec_token }}'
     state: started
+    env:
+      SPLUNK_PASSWORD: "{{ spl_admin_password|default('demo0815') }}"
+      SPLUNK_START_ARGS: "--accept-license"
     ports:
      - "514:514"
      - "1514:1514"
      - "8000:8000"
      - "8088:8088"
   when: 
-    - container_name is defined
-    - docker_image is defined
+    - spl_container_name is defined
+    - spl_docker_image is defined

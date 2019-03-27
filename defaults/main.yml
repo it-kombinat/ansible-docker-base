@@ -1,5 +1,4 @@
 ---
 # defaults file for ansible-docker-base
-container_name: splunk-demo
-docker_image: stackware/spl:1.8
-hec_token: token=abcd-efgh-123ada-0815
+spl_docker_image: splunk/splunk:latest
+spl_container_name: splunk
