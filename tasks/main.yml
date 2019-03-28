@@ -7,6 +7,7 @@
   loop:
     - docker
     - python-pip
+    - git
 
 - name: Installed docker-py
   pip:
@@ -23,13 +24,13 @@
 
 - name: Preparing Container Volume
   file:
-    path: /opt/con/etc
+    path: "{{ docker_vol }}"
     state: directory
 
-- name: Fetch apps and .conf files
+- name: Fetch Splunk - apps 
   git: 
     repo: "{{ item.repo }}"
-    dest: "{{ item.dest }}"
+    dest: "{{ docker_vol }}/{{ item.app }}"
   with_items:
     - "{{ splunk_apps }}"
 
@@ -37,8 +38,9 @@
   docker_container:
     name: '{{ spl_container_name }}'
     image: '{{ spl_docker_image }}'
-    command: '{{ hec_token }}'
     state: started
+    volumes:
+      - "{{ docker_vol }}/{{ item.app }}:{{ splunk_app_dir }}/{{ item.app }}"
     env:
       SPLUNK_PASSWORD: "{{ spl_admin_password|default('demo0815') }}"
       SPLUNK_START_ARGS: "--accept-license"
@@ -50,3 +52,5 @@
   when: 
     - spl_container_name is defined
     - spl_docker_image is defined
+  with_items:
+    - "{{ splunk_apps }}"

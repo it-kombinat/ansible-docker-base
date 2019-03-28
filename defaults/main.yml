@@ -2,3 +2,10 @@
 # defaults file for ansible-docker-base
 spl_docker_image: splunk/splunk:latest
 spl_container_name: splunk
+docker_vol: "/opt/con/vol"
+
+# Splunk App - Example
+splunk_app_dir: /opt/splunk/etc/apps
+splunk_apps:
+- repo: https://github.com/it-kombinat/snort-app.git
+  app: snort
