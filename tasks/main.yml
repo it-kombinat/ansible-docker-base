@@ -39,8 +39,7 @@
     name: '{{ spl_container_name }}'
     image: '{{ spl_docker_image }}'
     state: started
-    volumes:
-      - "{{ docker_vol }}/{{ item.app }}:{{ splunk_app_dir }}/{{ item.app }}"
+    volumes: "{{ docker_vol }}/{{ item.app }}:{{ splunk_app_dir }}/{{ item.app }}"
     env:
       SPLUNK_PASSWORD: "{{ spl_admin_password|default('demo0815') }}"
       SPLUNK_START_ARGS: "--accept-license"
